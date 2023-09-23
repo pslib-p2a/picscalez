@@ -1,5 +1,7 @@
 const { app, BrowserWindow } = require('electron')
 
+//test
+
 const createWindow = () => {
     const win = new BrowserWindow({
         webPreferences: {

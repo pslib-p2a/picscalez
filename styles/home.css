@@ -330,7 +330,7 @@ main .input .next {
 
 .export-options .export-option .export-choices .export-choice {
   margin: 4px 0;
-  width: 100%;
+  width: 35vw;
   border: 2.5px solid rgb(185, 185, 185);
   transition: all ease 0.2s;
   border-radius: 10px;
@@ -338,18 +338,32 @@ main .input .next {
   padding: 8px 12px;
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   cursor: pointer;
 }
-.export-options .export-option .export-choices .export-choice .export-icon {
+.export-options .export-option .export-choices .export-choice .export-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.export-options .export-option .export-choices .export-choice .export-info .export-icon {
   margin-right: 12px;
 }
-.export-options .export-option .export-choices .export-choice .export-icon svg {
+.export-options .export-option .export-choices .export-choice .export-info .export-icon svg {
   width: 60px;
   height: -moz-min-content;
   height: min-content;
 }
-.export-options .export-option .export-choices .export-choice .export-content h4.export-name {
+.export-options .export-option .export-choices .export-choice .export-info .export-content h4.export-name {
   margin: 0;
+}
+.export-options .export-option .export-choices .export-choice .export-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 16px;
+  float: right;
 }
 .export-options .export-option .export-choices input[type=radio] {
   display: none;

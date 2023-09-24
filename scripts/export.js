@@ -17,9 +17,6 @@ async function zipimages(filelist) {
         }
     });
 
-    // good practice to catch this error explicitly
-    // tak treba se jdi zabit
-
     archive.on('error', function(err) {
         throw err;
     });

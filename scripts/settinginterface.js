@@ -4,7 +4,7 @@ const textarea = document.querySelector("#content-settings textarea")
 blocks.forEach(block => {
     block.onclick = (e) => {
         const clone = e.target.outerHTML
-        program.insertAdjacentHTML( 'beforeend', clone )
+        program.insertAdjacentHTML('beforeend', clone)
         asignInputChange()
         program.querySelectorAll(".program .block").forEach(block => {
             block.oncontextmenu = (e) => {
@@ -17,10 +17,10 @@ blocks.forEach(block => {
     }
 })
 
-function parseBlocks () { 
+function parseBlocks() {
     let output = ""
     if (cli.classList.contains("active")) {
-        output = textarea.value 
+        output = textarea.value
     } else {
         const blocks = program.querySelectorAll(".program .block")
         blocks.forEach(block => {
@@ -41,7 +41,7 @@ document.querySelector("#guicli").onclick = () => {
     cli.classList.toggle("active")
 }
 
-function asignInputChange () {
+function asignInputChange() {
     const inputs = document.querySelectorAll("#content-settings input, #content-settings textarea")
     inputs.forEach(input => {
         input.oninput = () => {
@@ -53,33 +53,36 @@ function asignInputChange () {
 
 var combinations
 
-function showResultCount (code) {
+function showResultCount(code) {
     const parsed = parseCode(code)
     combinations = makeCombinations(parsed)
     const outputs = document.querySelector(".stats .outputs")
     outputs.innerHTML = ""
     combinations.forEach(com => {
         console.log(com);
-        outputs.insertAdjacentHTML( 'beforeend', `<li>S ${com.scale.scale} (N ${com.scale.name}) | C ${com.compress} | E ${com.export}</li>`)
+        outputs.insertAdjacentHTML('beforeend', `<li>S ${com.scale.scale} (N ${com.scale.name}) | C ${com.compress} | E ${com.export}</li>`)
     })
 }
 
 asignInputChange()
 
-setTimeout(() => {
-    document.querySelector("#export").onclick = () => {
-
-        imageData.forEach(image => {
-            console.log(handleImageCombinations(image.data, image.name, combinations))
-        })
+setTimeout(async() => {
+    document.querySelector("#export").onclick = async() => {
+        let rtn = []
+        for (const image of imageData) {
+            rtn.push(await handleImageCombinations(image.data, image.name, combinations))
+        }
+        console.log(rtn);
+        let zip = zipimages(rtn)
+        console.log(zip);
     }
-},3000)
+}, 3000)
 
 
-function handleImageCombinations(rawData, filename, combinations) {
-	let rtn = [];
-	for (const combination of combinations) {
-		rtn.push(makeImage(rawData, filename, combination["scale"], combination["compress"], combination["export"]));
-	}
-	return rtn;
+async function handleImageCombinations(rawData, filename, combinations) {
+    let rtn = [];
+    for (const combination of combinations) {
+        rtn.push(await makeImage(rawData, filename, combination["scale"], combination["compress"], combination["export"]));
+    }
+    return rtn;
 }

@@ -65,6 +65,18 @@ header img {
   text-transform: uppercase;
 }
 
+.default-btn {
+  cursor: pointer;
+  flex-shrink: 0;
+  background-color: #8A95F2;
+  border: 1px solid #2738D1;
+  border-radius: 3px;
+  padding: 8px 15px;
+  margin-right: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
 .file-msg {
   font-size: small;
   font-weight: 300;
@@ -208,7 +220,8 @@ main .input .next {
     min-width: 196px;
   }
 }
-#content-settings .gui, #content-settings .cli {
+#content-settings .gui,
+#content-settings .cli {
   display: none;
 }
 #content-settings .active {
@@ -314,3 +327,33 @@ main .input .next {
   visibility: visible;
   opacity: 1;
 }
+
+.export-options .export-option .export-choices .export-choice {
+  margin: 4px 0;
+  width: 100%;
+  border: 2.5px solid rgb(185, 185, 185);
+  transition: all ease 0.2s;
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+.export-options .export-option .export-choices .export-choice .export-icon {
+  margin-right: 12px;
+}
+.export-options .export-option .export-choices .export-choice .export-icon svg {
+  width: 60px;
+  height: -moz-min-content;
+  height: min-content;
+}
+.export-options .export-option .export-choices .export-choice .export-content h4.export-name {
+  margin: 0;
+}
+.export-options .export-option .export-choices input[type=radio] {
+  display: none;
+}
+.export-options .export-option .export-choices input[type=radio]:checked + label {
+  border: 2.5px solid #2738D1 !important;
+}/*# sourceMappingURL=home.css.map */

@@ -1,6 +1,8 @@
 const program = document.querySelector(".program")
 const blocks = document.querySelectorAll(".block")
 const textarea = document.querySelector("#content-settings textarea")
+const progressText = document.querySelector("#progress")
+const progressBar = document.querySelector("#progressbar")
 blocks.forEach(block => {
     block.onclick = (e) => {
         const clone = e.target.outerHTML
@@ -68,21 +70,33 @@ asignInputChange()
 
 setTimeout(async() => {
     document.querySelector("#export").onclick = async() => {
+        handler.log("Starting export")
+        handler.setProgressGeneral(0, 2)
+        handler.setProgressAction(0, imageData.length * combinations.length)
         let rtn = []
         for (const image of imageData) {
             rtn.push(await handleImageCombinations(image.data, image.name, combinations))
         }
+        handler.addProgressGeneral(1);
         console.log(rtn);
-        let zip = zipimages(rtn)
+        let zip = zipimages(rtn, exportOptions)
         console.log(zip);
     }
-}, 3000)
+}, 1000)
 
 
 async function handleImageCombinations(rawData, filename, combinations) {
     let rtn = [];
+    handler.log(`Starting to process image "${filename}" into ${combinations.length} combinations.`)
     for (const combination of combinations) {
         rtn.push(await makeImage(rawData, filename, combination["scale"], combination["compress"], combination["export"]));
+        handler.addProgressAction(1);
     }
     return rtn;
 }
+
+handler.on('progress', (progress) => {
+    let progressPercent = Math.min((progress.general.current / progress.general.total + progress.action.current / progress.action.total / progress.general.total) * 100, 100)
+    progressBar.style.width = progressPercent + "%"
+    progressText.innerHTML = Math.round(progressPercent) + "%"
+})

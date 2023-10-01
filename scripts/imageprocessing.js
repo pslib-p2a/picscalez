@@ -37,14 +37,18 @@ async function scaleImage(image, targetHeight) {
 }
 
 async function processImage(image, fileType, compressionScale) {
-    console.log(image);
-    if (fileType == "avif") {
-        return image.avif({ quality: 100 - compressionScale });
+    if (fileType == "avif" || fileType == "webp" || fileType == "jpeg" || fileType == "png" || fileType == "tiff") {
+        return await image.toFormat(fileType, { quality: 100 - compressionScale });
+    } else {
+        return await image;
+    }
+    /*if (fileType == "avif") {
+        return image.avif({ quality: 100 - compressionScale })
     } else if (fileType == "webp") {
-        return image.webp({ quality: 100 - compressionScale });
+        return image.webp({ quality: 100 - compressionScale })
     } else {
         return image.jpeg({ quality: 100 - compressionScale });
-    }
+    }*/
 }
 
 async function makeImage(rawData, filename, scale, compress, exprt) {
@@ -63,7 +67,7 @@ async function makeImage(rawData, filename, scale, compress, exprt) {
         console.log(targetHeight);
         let scaledImage = await scaleImage(image, targetHeight);
         let processedImage = await processImage(scaledImage, exprt, parseInt(compress))
-        let exportName = filename + "-" + scale["name"] + "-" + compress + "%c." + exprt;
+        let exportName = filename + "-" + scale["name"] + "-" + compress + "%." + exprt;
         resolve({ "data": (await (processedImage).toBuffer()), "name": exportName });
     })
 }

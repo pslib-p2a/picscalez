@@ -38,6 +38,9 @@
         };*/
     </script> -->
     <header>
+        <div id="progressbar">
+            <div id="progress"></div>
+        </div>
         <h1 class="logo"><img src="./public/logo.svg">Pic Scalez</h1>
     </header>
     <main>
@@ -123,7 +126,7 @@
                                     </div>
                                 </div>
                                 <div class="export-input">
-                                    <button class="default-btn" id="export-folder" onclick="getSavePath('folder')">Vybrat umístění</button>
+                                    <button class="default-btn export-btn" id="export-folder">Vybrat umístění</button>
                                 </div>
                             </label>
                             <input type="radio" value="zip" id="zip" name="type" />
@@ -150,7 +153,7 @@
                                 </div>
                                 
                                 <div class="export-input">
-                                    <button class="default-btn" id="export-zip" onclick="getSavePath('zip')">Vybrat umístění</button>
+                                    <button class="default-btn export-btn" id="export-zip">Vybrat umístění</button>
                                 </div>
                             </label>
                         </div>
@@ -169,6 +172,7 @@
         <div class="info">
         </div>
     </main>
+    <script src="./scripts/logs.js"></script>
     <script defer src="./scripts/imageprocessing.js"></script>
     <script defer src="./scripts/export.js"></script>
     <script defer src="./scripts/parser.js"></script>

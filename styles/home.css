@@ -30,13 +30,34 @@ header {
   flex-direction: row;
   justify-content: space-around;
   padding: 1vw 8vw;
+  position: relative;
+  z-index: 1;
 }
 header h1 {
   margin: 0;
+  z-index: 3;
 }
 header img {
   height: 1em;
   margin-right: 20px;
+  z-index: 3;
+}
+header #progressbar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: rgb(50, 194, 7);
+  transition: width 0.2s ease;
+}
+header #progressbar #progress {
+  color: #EAEBF1;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 4px 8px;
 }
 
 .file-drop-area {
@@ -355,14 +376,24 @@ main .input .next {
   height: -moz-min-content;
   height: min-content;
 }
+.export-options .export-option .export-choices .export-choice .export-info .export-content {
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .export-options .export-option .export-choices .export-choice .export-info .export-content h4.export-name {
   margin: 0;
+}
+.export-options .export-option .export-choices .export-choice .export-info .export-content .export-data {
+  padding-right: 8px;
+  word-break: break-all;
+  width: 100%;
+  display: inline;
+  font-size: 14px;
 }
 .export-options .export-option .export-choices .export-choice .export-input {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 16px;
   float: right;
 }
 .export-options .export-option .export-choices input[type=radio] {

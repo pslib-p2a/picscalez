@@ -1,3 +1,8 @@
+/*
+-=-=-=-=-=-=-=-=-=-=-
+GLOBAL
+-=-=-=-=-=-=-=-=-=-=-
+*/
 @font-face {
   font-family: PT;
   src: url("../public/ptregular.woff2");
@@ -27,11 +32,18 @@ header {
   font-family: PT;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   padding: 1vw 8vw;
   position: relative;
   z-index: 1;
   color: #EAEBF1;
+}
+header > * {
+  width: 10vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 header h1 {
   margin: 0;
@@ -43,28 +55,34 @@ header img {
   margin-right: 20px;
   z-index: 3;
 }
-header #progressbar {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background-color: rgb(50, 194, 7);
-  transition: width 0.2s ease;
-}
-header #progressbar #progress {
-  color: #EAEBF1;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 4px 8px;
-}
 
 main {
   width: 100%;
 }
 
+#progressbar {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: rgb(28, 114, 2);
+  transition: width 0.2s ease;
+}
+#progressbar #progress {
+  color: #EAEBF1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 8px;
+}
+
+/*
+-=-=-=-=-=-=-=-=-=-=-
+GRID
+-=-=-=-=-=-=-=-=-=-=-
+*/
 .box-grid {
   display: flex;
   flex-direction: column;
@@ -83,7 +101,7 @@ main {
   background: #111111;
   border: 2px solid #232323;
   color: #EAEBF1;
-  padding: 12px 24px;
+  padding: 16px 24px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -94,6 +112,7 @@ main {
 }
 .box-grid .box-row .box .box-head {
   display: flex;
+  flex: 0 1 auto;
   flex-direction: row;
   justify-content: space-between;
 }
@@ -121,7 +140,15 @@ main {
   cursor: pointer;
   line-height: inherit;
 }
+.box-grid .box-row .box .box-content {
+  flex: 1 1 auto;
+}
 
+/*
+-=-=-=-=-=-=-=-=-=-=-
+FILES
+-=-=-=-=-=-=-=-=-=-=-
+*/
 #box-files .box-content .files-slider-box {
   display: flex;
   flex-direction: row;
@@ -381,8 +408,8 @@ main .input .next {
   display: flex;
   flex-direction: row;
   /*#next {
-      padding: 16px 30px;
-      font-size: 18px;
+  padding: 16px 30px;
+  font-size: 18px;
   }*/
 }
 
@@ -417,6 +444,122 @@ main .input .next {
   font-size: 20px;
 }
 
+/*
+-=-=-=-=-=-=-=-=-=-=-
+        OUTPUT
+-=-=-=-=-=-=-=-=-=-=-
+*/
+#box-output .box-content #output-box {
+  width: 450px;
+  height: 100%;
+  background: #232323;
+  color: #EAEBF1;
+  font-size: 0.8em;
+  font-family: "PT", sans-serif;
+  border-radius: 8px;
+  border: none;
+  resize: none;
+}
+#box-output .box-content #output-content {
+  height: 100%;
+}
+#box-output .box-content #output-copy {
+  width: 3rem;
+  height: 3rem;
+  background: #111111;
+  color: #EAEBF1;
+  border-radius: 8px;
+  float: right;
+  margin: 0.7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+-=-=-=-=-=-=-=-=-=-=-
+        CODE
+-=-=-=-=-=-=-=-=-=-=-
+*/
+#box-code .box-content .code-container {
+  display: none;
+}
+#box-code .box-content .code-container.active {
+  display: block;
+}
+#box-code .box-content .code-container.code-cli #textinput {
+  width: 450px;
+  height: 300px;
+  background: #232323;
+  color: #EAEBF1;
+  font-size: 1.4em;
+  font-family: "PT", sans-serif;
+  border-radius: 8px;
+  border: none;
+  resize: none;
+}
+#box-code .box-content .code-container.code-gui .code-picker {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#box-code .box-content .code-container.code-gui .code-picker input {
+  width: 48px !important;
+}
+#box-code .box-content .code-container.code-gui .code-block {
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin: 4px;
+  border: 2px solid var(--color);
+  background: var(--bg);
+}
+#box-code .box-content .code-container.code-gui .code-block.block-scale {
+  --color: #eb3443;
+  --bg: #eb34433f;
+}
+#box-code .box-content .code-container.code-gui .code-block.block-compress {
+  --color: #06a11b;
+  --bg: #06a11b3f;
+}
+#box-code .box-content .code-container.code-gui .code-block.block-export {
+  --color: #0168dd;
+  --bg: #0168dd3f;
+}
+#box-code .box-content .code-container.code-gui .code-block input {
+  width: 96px;
+  background: transparent;
+  color: #EAEBF1;
+  font-family: "PT", sans-serif;
+  border: none;
+  border-bottom: 2px solid var(--color);
+  resize: none;
+  text-align: center;
+  margin: 0;
+}
+#box-code .box-content .code-container.code-gui .code-block input::-moz-placeholder {
+  color: #EAEBF1;
+}
+#box-code .box-content .code-container.code-gui .code-block input::placeholder {
+  color: #EAEBF1;
+}
+#box-code .box-content .code-container.code-gui .program {
+  padding: 4px;
+  width: 450px;
+  height: 260px;
+  background: #232323;
+  color: #EAEBF1;
+  font-family: "PT", sans-serif;
+  border-radius: 8px;
+  border: none;
+  resize: none;
+}
+
+/*   
+-=-=-=-=-=-=-=-=-=-=-
+        PREVIEW
+-=-=-=-=-=-=-=-=-=-=-
+*/
 .button-64 {
   align-items: center;
   background-image: linear-gradient(144deg, #2738D1, #8A95F2);
@@ -580,13 +723,19 @@ main .input .next {
   opacity: 1;
 }
 
+/*
+-=-=-=-=-=-=-=-=-=-=-
+EXPORT
+-=-=-=-=-=-=-=-=-=-=-
+*/
 .export-options .export-option .export-choices .export-choice {
   margin: 4px 0;
   width: 35vw;
-  border: 2.5px solid rgb(185, 185, 185);
+  border: 2.5px solid #111111;
+  border-style: double;
   transition: all ease 0.2s;
   border-radius: 10px;
-  background: #fff;
+  background: #232323;
   padding: 8px 12px;
   display: flex;
   flex-direction: row;
@@ -631,5 +780,5 @@ main .input .next {
   display: none;
 }
 .export-options .export-option .export-choices input[type=radio]:checked + label {
-  border: 2.5px solid #2738D1 !important;
+  border: 2.5px solid #8A95F2 !important;
 }/*# sourceMappingURL=alt.css.map */

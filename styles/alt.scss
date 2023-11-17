@@ -1,3 +1,9 @@
+/*
+-=-=-=-=-=-=-=-=-=-=-
+GLOBAL
+-=-=-=-=-=-=-=-=-=-=-
+*/
+
 $dark: #161616;
 $darker: #111111;
 $gray: #232323;
@@ -36,11 +42,18 @@ header {
     font-family: PT;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     padding: 1vw 8vw;
     position: relative;
     z-index: 1;
     color: $light;
+    &>* {
+        width: 10vw;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
     h1 {
         margin: 0;
         z-index: 3;
@@ -51,28 +64,36 @@ header {
         margin-right: 20px;
         z-index: 3;
     }
-    #progressbar {
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 100%;
-        background-color: rgb(50, 194, 7);
-        transition: width 0.2s ease;
-        #progress {
-            color: $light;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            padding: 4px 8px;
-        }
-    }
 }
 
 main {
     width: 100%;
 }
+
+#progressbar {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgb(28, 114, 2);
+    transition: width 0.2s ease;
+    #progress {
+        color: $light;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 4px 8px;
+    }
+}
+
+
+/*
+-=-=-=-=-=-=-=-=-=-=-
+GRID
+-=-=-=-=-=-=-=-=-=-=-
+*/
 
 .box-grid {
     display: flex;
@@ -89,7 +110,7 @@ main {
             background: $darker;
             border: 2px solid $gray;
             color: $light;
-            padding: 12px 24px;
+            padding: 16px 24px;
             border-radius: 5px;
             display: flex;
             flex-direction: column;
@@ -98,6 +119,7 @@ main {
             width: max-content;
             .box-head {
                 display: flex;
+                flex: 0 1 auto;
                 flex-direction: row;
                 justify-content: space-between;
                 .box-heading {
@@ -129,9 +151,19 @@ main {
                     }
                 }
             }
+            .box-content {
+                flex: 1 1 auto;
+            }
         }
     }
 }
+
+
+/*
+-=-=-=-=-=-=-=-=-=-=-
+FILES
+-=-=-=-=-=-=-=-=-=-=-
+*/
 
 #box-files .box-content {
     .files-slider-box {
@@ -170,7 +202,7 @@ main {
             overflow-x: hidden;
             justify-content: space-between;
             align-items: center;
-            width: calc(51rem);
+            width: 51rem;
             transition: all 0.15s ease-in-out;
             .file-input {
                 cursor: pointer;
@@ -391,9 +423,9 @@ main {
             display: flex;
             flex-direction: row;
             /*#next {
-                padding: 16px 30px;
-                font-size: 18px;
-            }*/
+padding: 16px 30px;
+font-size: 18px;
+}*/
         }
     }
 }
@@ -426,6 +458,134 @@ main {
         }
     }
 }
+
+
+/*
+-=-=-=-=-=-=-=-=-=-=-
+        OUTPUT
+-=-=-=-=-=-=-=-=-=-=-
+*/
+
+#box-output .box-content {
+    #output-box {
+        width: 450px;
+        height: 100%;
+        background: $gray;
+        color: $light;
+        font-size: .8em;
+        font-family: 'PT', sans-serif;
+        border-radius: 8px;
+        border: none;
+        resize: none;
+    }
+    #output-content {
+        height: 100%;
+    }
+    #output-copy {
+        width: 3rem;
+        height: 3rem;
+        background: $darker;
+        color: $light;
+        border-radius: 8px;
+        float: right;
+        margin: 0.7rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+/*
+-=-=-=-=-=-=-=-=-=-=-
+        CODE
+-=-=-=-=-=-=-=-=-=-=-
+*/
+
+#box-code .box-content {
+    .code-container {
+        display: none;
+        &.active {
+            display: block;
+        }
+        &.code-cli {
+            #textinput {
+                width: 450px;
+                height: 300px;
+                background: $gray;
+                color: $light;
+                font-size: 1.4em;
+                font-family: 'PT', sans-serif;
+                border-radius: 8px;
+                border: none;
+                resize: none;
+            }
+        }
+        &.code-gui {
+            .code-picker {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                input {
+                    width: 48px !important;
+                }
+            }
+            .code-block {
+                padding: 2px 6px;
+                border-radius: 8px;
+                margin: 4px;
+                &.block-scale {
+                    --color: #eb3443;
+                    --bg: #eb34433f;
+                }
+                &.block-compress {
+                    --color: #06a11b;
+                    --bg: #06a11b3f;
+                }
+                &.block-export {
+                    --color: #0168dd;
+                    --bg: #0168dd3f;
+                }
+                border: 2px solid var(--color);
+                background: var(--bg);
+                input {
+                    width: 96px;
+                    background: transparent;
+                    color: $light;
+                    font-family: 'PT', sans-serif;
+                    border: none;
+                    border-bottom: 2px solid var(--color);
+                    resize: none;
+                    text-align: center;
+                    margin: 0;
+                    //placeholder color
+                    &::placeholder {
+                        color: $light;
+                    }
+                }
+            }
+            .program {
+                padding: 4px;
+                width: 450px;
+                height: 260px;
+                background: $gray;
+                color: $light;
+                font-family: 'PT', sans-serif;
+                border-radius: 8px;
+                border: none;
+                resize: none;
+            }
+        }
+    }
+}
+
+
+/*   
+-=-=-=-=-=-=-=-=-=-=-
+        PREVIEW
+-=-=-=-=-=-=-=-=-=-=-
+*/
 
 .button-64 {
     align-items: center;
@@ -592,16 +752,24 @@ main {
     opacity: 1;
 }
 
+
+/*
+-=-=-=-=-=-=-=-=-=-=-
+EXPORT
+-=-=-=-=-=-=-=-=-=-=-
+*/
+
 .export-options {
     .export-option {
         .export-choices {
             .export-choice {
                 margin: 4px 0;
                 width: 35vw;
-                border: 2.5px solid rgb(185, 185, 185);
+                border: 2.5px solid $darker;
+                border-style: double;
                 transition: all ease .2s;
                 border-radius: 10px;
-                background: #fff;
+                background: $gray;
                 padding: 8px 12px;
                 display: flex;
                 flex-direction: row;
@@ -643,7 +811,7 @@ main {
             input[type="radio"] {
                 display: none;
                 &:checked+label {
-                    border: 2.5px solid $primary !important;
+                    border: 2.5px solid $secondary !important;
                 }
             }
         }

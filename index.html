@@ -38,15 +38,23 @@
         }
         };*/
     </script> -->
+    <div id="progressbar">
+    </div>
     <header>
-        <div id="progressbar">
-            <div id="progress"></div>
-        </div>
+        <div class=""></div>
         <h1 class="logo"><img src="./public/logo.svg">Pixcalez</h1>
+        <div id="progress">Waiting...</div>
     </header>
     <main>
         <div class="box-grid">
             <div class="box-row" id="row-top">
+
+                <!-- 
+                    
+                    FILES BOX (UPLOAD)
+                
+                -->
+
                 <div class="box" id="box-files">
                     <div class="box-head">
                         <div class="box-heading">
@@ -73,69 +81,115 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 
+                    
+                    OUTPUT BOX (HTML)
+                
+                -->
+
                 <div class="box" id="box-output">
                     <div class="box-head">
                         <div class="box-heading">
                             <h2 class="box-name">Output</h2>
                         </div>
                         <div class="box-options">
-                            <select id="select-output-image">
-                                <option value="none">Vybrat</option>
+                            <select id="output-image-select">
+                                <option value="all">All</option>
                             </select>
                         </div>
                     </div>
                     <div class="box-content">
-                        <div id="output-content"></div>
-                        <div id="output-copy"></div>
+
+                        <div id="output-box">
+                            <div id="output-copy">C</div>
+                            <div id="output-content" contenteditable></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="box-row" id="r2">
+
+                <!-- 
+                    
+                    CODE BOX (INSTRUCTIONS)
+                
+                -->
+
                 <div class="box" id="box-code">
                     <div class="box-head">
                         <div class="box-heading">
                             <h2 class="box-name">Code</h2>
                         </div>
                         <div class="box-options">
-                            <select id="select-output-image">
+                            <select id="guicli-select">
                                 <option value="gui" selected>GUI</option>
                                 <option value="cli">CLI</option>
                             </select>
                         </div>
                     </div>
                     <div class="box-content">
-                        <div class="code-cli">
-                            <textarea name="" id="textinput" cols="60" rows="15"></textarea>
+                        <div class="code-container code-cli">
+                            <textarea name="" id="textinput"></textarea>
                         </div>
-                        <div class="code-gui active">
+                        <div class="code-container code-gui active">
                             <div class="code-picker">
                                 <div class="code-block block-scale" data-name="scale">
                                     <span class="block-instruction">SCALE</span>
                                     <div class="block-inputs tooltip">
-                                        <input class="block-input" placeholder="px/%" required>
+                                        <input class="block-input" placeholder="px/%">
                                         <span class="tooltiptext">1080 px / 50 %</span>
                                     </div>
                                 </div>
                                 <div class="code-block block-compress" data-name="compress">
                                     <span class="block-instruction">COMPRESS</span>
                                     <div class="block-inputs tooltip">
-                                        <input class="block-input" placeholder="%" required>
+                                        <input class="block-input" placeholder="%">
                                         <span class="tooltiptext">50 %</span>
                                     </div>
                                 </div>
                                 <div class="code-block block-export" data-name="export">
                                     <span class="block-instruction">EXPORT</span>
                                     <div class="block-inputs tooltip">
-                                        <input class="block-input" placeholder="type" required>
+                                        <input class="block-input" placeholder="type">
                                         <span class="tooltiptext">PNG/JPG/WEBP/AVIF/TIFF</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="program"></div>
+                            <div class="program">
+                                <div class="code-block block-scale" data-name="scale">
+                                    <span class="block-instruction">SCALE</span>
+                                    <div class="block-inputs tooltip">
+                                        <input class="block-input" placeholder="px/%">
+                                        <span class="tooltiptext">1080 px / 50 %</span>
+                                    </div>
+                                </div>
+                                <div class="code-block block-compress" data-name="compress">
+                                    <span class="block-instruction">COMPRESS</span>
+                                    <div class="block-inputs tooltip">
+                                        <input class="block-input" placeholder="%">
+                                        <span class="tooltiptext">50 %</span>
+                                    </div>
+                                </div>
+                                <div class="code-block block-export" data-name="export">
+                                    <span class="block-instruction">EXPORT</span>
+                                    <div class="block-inputs tooltip">
+                                        <input class="block-input" placeholder="type">
+                                        <span class="tooltiptext">PNG/JPG/WEBP/AVIF/TIFF</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                 </div>
+
+                <!-- 
+                    
+                    PREVIEW BOX (FILE OUTPUT)
+                
+                -->
+
                 <div class="box" id="box-preview">
                     <div class="box-head">
                         <div class="box-heading">
@@ -144,8 +198,16 @@
                         </div>
                     </div>
                     <div class="box-content">
+                        <div id="code-preview"></div>
                     </div>
                 </div>
+
+                <!-- 
+                    
+                    EXPORT BOX (SETTINGS)
+                
+                -->
+
                 <div class="box" id="box-export">
                     <div class="box-head">
                         <div class="box-heading">
@@ -175,14 +237,14 @@
         
                                             </div>
                                             <div class="export-content">
-                                                <h4 class="export-name">Do složky</h4>
+                                                <h4 class="export-name">To a Folder</h4>
                                                 <div class="export-data">
-                                                    <span class="location">Vyberte umístění složky</span>
+                                                    <span class="location">Choose a folder location</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="export-input">
-                                            <button class="default-btn export-btn" id="export-folder">Vybrat umístění</button>
+                                            <button class="default-btn export-btn" id="export-folder">Open</button>
                                         </div>
                                     </label>
                                     <input type="radio" value="zip" id="zip" name="type" />
@@ -201,15 +263,15 @@
             
                                             </div>
                                             <div class="export-content">
-                                                <h4 class="export-name">Do ZIP Archivu</h4>
+                                                <h4 class="export-name">To a ZIP Archive</h4>
                                                 <div class="export-data">
-                                                    <span class="location">Vyberte umístění ZIP Archivu</span>
+                                                    <span class="location">Choose a ZIP archive location</span>
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         <div class="export-input">
-                                            <button class="default-btn export-btn" id="export-zip">Vybrat umístění</button>
+                                            <button class="default-btn export-btn" id="export-zip">Open</button>
                                         </div>
                                     </label>
                                 </div>

@@ -115,11 +115,7 @@ const data = [{ "name": "img-small.avif", "format": "avif", "size": "480w" }, { 
     { "name": "img-small.webp", "format": "webp", "size": "480w" }, { "name": "img-medium.webp", "format": "webp", "size": "840w" }, { "name": "img-medium.webp", "format": "webp", "size": "840w" }
 ]
 
-let HTMLOutput = document.querySelector("#output-content")
-HTMLOutput.innerText = makeHTML(data)
-
 function makeHTML(data) {
-    console.log(data);
     let rtn = []
     rtn.push("<picture>\n")
 
@@ -137,6 +133,7 @@ function makeHTML(data) {
                 currentString += img["name"] + " " + img["size"] + ", "
             }
         }
+        currentString = currentString.rstrip(", ")
         currentString += '" type="image/' + formt + '" />'
         rtn.push(currentString)
         currentString = ""
@@ -147,6 +144,7 @@ function makeHTML(data) {
     for (x of rtn) {
         rtnString += x
     }
-    console.log(rtnString);
     return rtnString
 }
+
+makeHTML(data)

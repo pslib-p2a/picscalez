@@ -1,14 +1,14 @@
 const program = document.querySelector(".program")
-const blocks = document.querySelectorAll(".code-block")
+const blocks = document.querySelectorAll(".block")
 const textarea = document.querySelector("#content-settings textarea")
 const progressText = document.querySelector("#progress")
 const progressBar = document.querySelector("#progressbar")
 blocks.forEach(block => {
     block.onclick = (e) => {
-        const clone = e.currentTarget.outerHTML
+        const clone = e.target.outerHTML
         program.insertAdjacentHTML('beforeend', clone)
         asignInputChange()
-        program.querySelectorAll(".program .code-block").forEach(block => {
+        program.querySelectorAll(".program .block").forEach(block => {
             block.oncontextmenu = (e) => {
                 e.preventDefault();
                 block.remove()
@@ -19,16 +19,12 @@ blocks.forEach(block => {
     }
 })
 
-const gui = document.querySelector(".code-gui")
-const cli = document.querySelector(".code-cli")
-const cliInput = document.querySelector(".code-cli textarea")
-
 function parseBlocks() {
     let output = ""
     if (cli.classList.contains("active")) {
-        output = cliInput.value
+        output = textarea.value
     } else {
-        const blocks = program.querySelectorAll(".program .code-block")
+        const blocks = program.querySelectorAll(".program .block")
         blocks.forEach(block => {
             output += block.getAttribute("data-name")
             block.querySelectorAll("input").forEach(input => {
@@ -40,22 +36,19 @@ function parseBlocks() {
     return output
 }
 
-const guicliSelect = document.querySelector("#guicli-select")
-guicliSelect.onchange = () => {
-    if (guicliSelect.value == "gui") {
-        gui.classList.add("active")
-        cli.classList.remove("active")
-    } else {
-        gui.classList.remove("active")
-        cli.classList.add("active")
-    }
+const gui = document.querySelector(".gui")
+const cli = document.querySelector(".cli")
+document.querySelector("#guicli").onclick = () => {
+    gui.classList.toggle("active")
+    cli.classList.toggle("active")
 }
 
 function asignInputChange() {
-    const inputs = document.querySelectorAll(".code-gui .program input, .code-cli textarea")
+    const inputs = document.querySelectorAll("#content-settings input, #content-settings textarea")
     inputs.forEach(input => {
         input.oninput = () => {
             showResultCount(parseBlocks())
+
         }
     })
 }
@@ -65,7 +58,7 @@ var combinations
 function showResultCount(code) {
     const parsed = parseCode(code)
     combinations = makeCombinations(parsed)
-    const outputs = document.querySelector("#code-preview")
+    const outputs = document.querySelector(".stats .outputs")
     outputs.innerHTML = ""
     combinations.forEach(com => {
         console.log(com);
@@ -92,7 +85,6 @@ setTimeout(async() => {
 }, 1000)
 
 
-
 async function handleImageCombinations(rawData, filename, combinations) {
     let rtn = [];
     handler.log(`Starting to process image "${filename}" into ${combinations.length} combinations.`)
@@ -107,12 +99,4 @@ handler.on('progress', (progress) => {
     let progressPercent = Math.min((progress.general.current / progress.general.total + progress.action.current / progress.action.total / progress.general.total) * 100, 100)
     progressBar.style.width = progressPercent + "%"
     progressText.innerHTML = Math.round(progressPercent) + "%"
-
-    if (progressPercent == 100) {
-        progressText.innerHTML = "Done!"
-        setTimeout(() => {
-            progressText.innerHTML = "Waiting..."
-            progressBar.style.width = "0%"
-        }, 5000)
-    }
 })

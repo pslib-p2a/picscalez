@@ -60,17 +60,50 @@ function asignInputChange() {
     })
 }
 
+function generateHTML(com) {
+    let valuesString = '';
+    let namesString = '';
+
+
+    Object.keys(com).forEach(command => {
+        valuesString += `<span class="previewcmd ${command}">${com[command].value}</span> `;
+        if (com[command].name) {
+            namesString += "_" + command.charAt(0) + com[command].name;
+        }
+    });
+
+
+
+    return { valuesString, namesString };
+}
+let counterElement = document.querySelector('#preview-counter');
 var combinations
+
+function editExportNumber() {
+    let exportNumber = document.querySelector("#export-counter")
+    exportNumber.innerText = parseInt(counterElement.innerText) * parseInt(fileCount.innerText)
+}
 
 function showResultCount(code) {
     const parsed = parseCode(code)
+
     combinations = makeCombinations(parsed)
+
+    if (counterElement) {
+        counterElement.textContent = combinations.length;
+    }
+    editExportNumber()
+
     const outputs = document.querySelector("#code-preview")
     outputs.innerHTML = ""
+
     combinations.forEach(com => {
         console.log(com);
-        outputs.insertAdjacentHTML('beforeend', `<li>S ${com.scale.scale} (N ${com.scale.name}) | C ${com.compress} | E ${com.export}</li>`)
+        let genhtml = generateHTML(com);
+        outputs.insertAdjacentHTML('beforeend', `<li>${genhtml.valuesString} as <span contenteditable="true" class="previewname" id="${genhtml.namesString}.${com.export.value}">img${genhtml.namesString}.${com.export.value}</span></li>`);
     })
+
+    updateOutputHTML()
 }
 
 asignInputChange()

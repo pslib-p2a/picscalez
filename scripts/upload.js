@@ -1,9 +1,12 @@
 const path = require('path');
 
+let uploadedImages = []
+
 var imageData = []
 let files = []
 let currentFilePage = 0
 let pageCount = 0
+
 
 const updateFiles = (e) => {
     fileInputs.forEach(input => {
@@ -21,6 +24,8 @@ const updateFiles = (e) => {
         if (!inArr) files.push(...input.files)
 
         for (let file of input.files) {
+            outputSelect.insertAdjacentHTML("beforeend", `<option value="${file.path}" id="${file.path}">${file.name.slice(0,18)}</option>`)
+
             console.log(file);
             let reader = new FileReader()
             reader.onload = () => {
@@ -28,6 +33,8 @@ const updateFiles = (e) => {
                 imageData.push({ data: file.path, name: file.name })
                 let img = new Image();
                 let objectUrl = window.URL.createObjectURL(file);
+                img.src = objectUrl;
+                img.classList.add("file-image")
                 img.onload = function() {
                     fileSlider.insertAdjacentHTML("beforeend",
                         `<div class="file-container">
@@ -44,9 +51,10 @@ const updateFiles = (e) => {
                         </div>
                     </div>`
                     )
+
+                    uploadedImages.push({ width: this.width, height: this.height, path: file.path, name: file.name, format: file.type.split("/")[1] })
+                    if (uploadedImages.length == input.files.length) updateOutputHTML()
                 }
-                img.src = objectUrl;
-                img.classList.add("file-image")
             }
             reader.readAsDataURL(file)
         }
@@ -79,6 +87,9 @@ const removeFile = (e) => {
     }
     e.target.parentElement.remove()
     updateFileView()
+
+    document.getElementById(path).remove()
+    uploadedImages.filter(image => image.path != path)
 }
 
 
@@ -104,6 +115,7 @@ const humanFileSize = (bytes, si = false, dp = 1) => {
 const updateFileView = () => {
     //update file count, slider, arrows and file array
     fileCount.innerText = files.length
+    editExportNumber()
     pageCount = Math.ceil((files.length + 1) / 4)
 
     //update arrows

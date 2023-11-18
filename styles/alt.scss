@@ -482,6 +482,7 @@ font-size: 18px;
         height: 100%;
     }
     #output-copy {
+        cursor: pointer;
         width: 3rem;
         height: 3rem;
         background: $darker;
@@ -586,6 +587,34 @@ font-size: 18px;
         PREVIEW
 -=-=-=-=-=-=-=-=-=-=-
 */
+
+#box-preview .box-content {
+    overflow: auto;
+    #code-preview {
+        li {
+            padding: 4px 0;
+            list-style: none;
+        }
+        .previewcmd {
+            padding: 0 0.5rem;
+            border-radius: 8px;
+            &.scale {
+                --color: #eb3443;
+                --bg: #eb34433f;
+            }
+            &.compress {
+                --color: #06a11b;
+                --bg: #06a11b3f;
+            }
+            &.export {
+                --color: #0168dd;
+                --bg: #0168dd3f;
+            }
+            border: 2px solid var(--color);
+            background: var(--bg);
+        }
+    }
+}
 
 .button-64 {
     align-items: center;

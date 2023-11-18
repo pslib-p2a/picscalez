@@ -95,14 +95,18 @@
                         </div>
                         <div class="box-options">
                             <select id="output-image-select">
-                                <option value="all">All</option>
+                                <option value="none">Vyberte</option>
                             </select>
                         </div>
                     </div>
                     <div class="box-content">
 
                         <div id="output-box">
-                            <div id="output-copy">C</div>
+                            <div id="output-copy">
+                                <svg width="20" height="20" viewBox="0 0 62 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0H62V50H55V6H12V0ZM50 11H0V61H50V11Z" fill="white"/>
+                                </svg>
+                            </div>
                             <div id="output-content" contenteditable></div>
                         </div>
                     </div>
@@ -157,27 +161,7 @@
                                 </div>
                             </div>
                             <div class="program">
-                                <div class="code-block block-scale" data-name="scale">
-                                    <span class="block-instruction">SCALE</span>
-                                    <div class="block-inputs tooltip">
-                                        <input class="block-input" placeholder="px/%">
-                                        <span class="tooltiptext">1080 px / 50 %</span>
-                                    </div>
-                                </div>
-                                <div class="code-block block-compress" data-name="compress">
-                                    <span class="block-instruction">COMPRESS</span>
-                                    <div class="block-inputs tooltip">
-                                        <input class="block-input" placeholder="%">
-                                        <span class="tooltiptext">50 %</span>
-                                    </div>
-                                </div>
-                                <div class="code-block block-export" data-name="export">
-                                    <span class="block-instruction">EXPORT</span>
-                                    <div class="block-inputs tooltip">
-                                        <input class="block-input" placeholder="type">
-                                        <span class="tooltiptext">PNG/JPG/WEBP/AVIF/TIFF</span>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -194,7 +178,7 @@
                     <div class="box-head">
                         <div class="box-heading">
                             <h2 class="box-name">Preview</h2>
-                            <h2 class="box-counter">(<span class="box-count" id="files-counter"></span>)</h2>
+                            <h2 class="box-counter">(<span class="box-count" id="preview-counter">0</span>)</h2>
                         </div>
                     </div>
                     <div class="box-content">
@@ -212,6 +196,7 @@
                     <div class="box-head">
                         <div class="box-heading">
                             <h2 class="box-name">Export</h2>
+                            <h2 class="box-counter">(<span class="box-count" id="export-counter">0</span>)</h2>
                         </div>
                     </div>
                     <div class="box-content">

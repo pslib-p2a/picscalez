@@ -464,6 +464,7 @@ main .input .next {
   height: 100%;
 }
 #box-output .box-content #output-copy {
+  cursor: pointer;
   width: 3rem;
   height: 3rem;
   background: #111111;
@@ -560,6 +561,32 @@ main .input .next {
         PREVIEW
 -=-=-=-=-=-=-=-=-=-=-
 */
+#box-preview .box-content {
+  overflow: auto;
+}
+#box-preview .box-content #code-preview li {
+  padding: 4px 0;
+  list-style: none;
+}
+#box-preview .box-content #code-preview .previewcmd {
+  padding: 0 0.5rem;
+  border-radius: 8px;
+  border: 2px solid var(--color);
+  background: var(--bg);
+}
+#box-preview .box-content #code-preview .previewcmd.scale {
+  --color: #eb3443;
+  --bg: #eb34433f;
+}
+#box-preview .box-content #code-preview .previewcmd.compress {
+  --color: #06a11b;
+  --bg: #06a11b3f;
+}
+#box-preview .box-content #code-preview .previewcmd.export {
+  --color: #0168dd;
+  --bg: #0168dd3f;
+}
+
 .button-64 {
   align-items: center;
   background-image: linear-gradient(144deg, #2738D1, #8A95F2);

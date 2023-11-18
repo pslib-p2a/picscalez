@@ -2,6 +2,8 @@ const archiver = require('archiver')
 const { ipcRenderer } = require("electron")
 const fs = require("node:fs")
 
+const outputSelect = document.querySelector("#output-image-select")
+
 let exportOptions = {
     path: "", // Path to export
     option: "" // Export option (zip or folder)
@@ -107,37 +109,76 @@ async function getSavePath(e) {
 }
 
 document.querySelectorAll(".export-btn").forEach(exportButton => {
-    exportButton.onclick = getSavePath;
-})
-
+        exportButton.onclick = getSavePath;
+    })
+    // data = {images: array of images (image) and file names, combinations (array)}
 const data = [{ "name": "img-small.avif", "format": "avif", "size": "480w" }, { "name": "img-medium.avif", "format": "avif", "size": "840w" }, { "name": "img-medium.avif", "format": "avif", "size": "840w" },
     { "name": "img-small.jpg", "format": "jpeg", "size": "480w" }, { "name": "img-medium.jpg", "format": "jpeg", "size": "840w" }, { "name": "img-medium.jpg", "format": "jpeg", "size": "840w" },
     { "name": "img-small.webp", "format": "webp", "size": "480w" }, { "name": "img-medium.webp", "format": "webp", "size": "840w" }, { "name": "img-medium.webp", "format": "webp", "size": "840w" }
 ]
 
 let HTMLOutput = document.querySelector("#output-content")
-HTMLOutput.innerText = makeHTML(data)
+
+outputSelect.onchange = updateOutputHTML
+
+
+function updateOutputHTML() {
+    uploadedImages.forEach(image => {
+        if (image.path == outputSelect.value) {
+            let data = []
+
+            combinations.forEach(com => {
+                console.log(com);
+                let size
+                if (com.scale.value.includes("%")) {
+                    size = image.width * parseFloat(filterFloat(com.scale.value)) / 100;
+                } else {
+                    size = parseFloat(filterFloat(com.scale.value));
+                }
+
+                let [namesString, suffix] = image.name.split(".");
+                Object.keys(com).forEach(command => {
+                    if (com[command].name) {
+                        namesString += "_" + command.charAt(0) + com[command].name;
+                    }
+                });
+                namesString += "." + com.export.value;
+
+                data.push({ format: com.export.value, size: size + "w", name: namesString })
+            })
+            console.log(data);
+            imageHTML = makeHTML(data)
+            HTMLOutput.innerText = imageHTML
+        }
+    })
+
+    //uploadedImages.push({ width: this.width, height: this.height, path: file.path, name: file.name, format: file.type.split("/")[1] })
+
+
+}
 
 function makeHTML(data) {
-    console.log(data);
     let rtn = []
     rtn.push("<picture>\n")
 
     let formats = []
     for (img of data) {
-        if (!formats.includes(img["format"])) {
-            formats.push(img["format"])
+        if (!formats.includes(img.format)) {
+            formats.push(img.format)
         }
     }
 
     for (formt of formats) {
         let currentString = '<source srcset="'
-        for (img in data) {
-            if (img["format"] == formt) {
-                currentString += img["name"] + " " + img["size"] + ", "
+        for (img of data) {
+            console.log(img);
+            console.log(formt);
+            if (img.format == formt) {
+                currentString += img.name + " " + img.size + ", "
             }
         }
         currentString += '" type="image/' + formt + '" />'
+        console.log(currentString);
         rtn.push(currentString)
         currentString = ""
     }

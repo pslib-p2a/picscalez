@@ -33,7 +33,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 1vw 8vw;
+  padding: 2vw 8vw 0vw 8vw;
   position: relative;
   z-index: 1;
   color: #EAEBF1;
@@ -54,6 +54,125 @@ header img {
   height: 1em;
   margin-right: 20px;
   z-index: 3;
+}
+header .saves {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+header .saves .saveopt {
+  padding: 0 4px;
+  cursor: pointer;
+}
+header .saves .saveopt.active {
+  z-index: 101;
+}
+header .saves .savemodal {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+header .saves .savemodal.active {
+  display: flex;
+}
+header .saves .savemodal .modalbox {
+  background: #161616;
+  padding: 1.5vw 2vw;
+}
+header .saves .savemodal .modalbox .modaltitle {
+  font-size: 2em;
+  margin: 0;
+  padding: 0;
+}
+header .saves .savemodal .modalbox .modalcontent {
+  padding: 1vw 0;
+}
+header .saves .savemodal .modalbox .modalcontent .modalinput {
+  width: 100%;
+  background: transparent;
+  color: #EAEBF1;
+  font-family: "PT", sans-serif;
+  border: none;
+  border-bottom: 2px solid #2738D1;
+  resize: none;
+  margin: 0;
+  font-size: 1.5em;
+}
+header .saves .savemodal .modalbox .modalcontent .modalbutton {
+  margin: 1vw 0 0;
+}
+header .saves .savemodal .templateinput {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+header .saves .savemodal .templateinput .template .templatelabel {
+  margin: 4px 0;
+  min-width: 25vw;
+  border: 2.5px solid #111111;
+  border-style: double;
+  transition: all ease 0.2s;
+  border-radius: 10px;
+  background: #232323;
+  padding: 4px 12px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+header .saves .savemodal .templateinput .template .templatelabel .templatevalues {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+header .saves .savemodal .templateinput .template .templatelabel .templatevalues .templatename {
+  margin: 0;
+}
+header .saves .savemodal .templateinput .template .templatelabel .templatevalues .templatedate {
+  padding: 0 16px;
+}
+header .saves .savemodal .templateinput .template .templatelabel .templateremove {
+  cursor: pointer;
+  background: #F64040;
+  color: #EAEBF1;
+  border-radius: 5px;
+  border: 3px solid #F64040;
+  transition: all 0.15s ease-in-out;
+  transform-origin: top right;
+  font-weight: bold;
+  padding: 0 4px;
+  width: -moz-min-content;
+  width: min-content;
+}
+header .saves .savemodal .templateinput .template .templatelabel .templateremove svg {
+  transition: all 0.15s ease-in-out;
+}
+header .saves .savemodal .templateinput .template .templatelabel .templateremove svg path {
+  fill: #EAEBF1;
+}
+header .saves .savemodal .templateinput .template .templatelabel .templateremove:hover {
+  border: 3px solid #F64040;
+  background: #161616;
+  color: #F64040;
+}
+header .saves .savemodal .templateinput .template input[type=radio] {
+  display: none;
+}
+header .saves .savemodal .templateinput .template input[type=radio]:checked + label {
+  border: 2.5px solid #8A95F2 !important;
 }
 
 main {
@@ -161,7 +280,6 @@ FILES
   border-top: 4px solid #8A95F2;
   border-left: 4px solid #8A95F2;
   cursor: pointer;
-  z-index: 50;
   margin: 0 1rem;
 }
 #box-files .box-content .files-slider-box .files-arrow.disabled {
@@ -360,13 +478,19 @@ FILES
 .default-btn {
   cursor: pointer;
   flex-shrink: 0;
-  background-color: #8A95F2;
-  border: 1px solid #2738D1;
+  background-color: transparent;
+  border: 2px solid #2738D1;
   border-radius: 3px;
   padding: 8px 15px;
   margin-right: 10px;
   font-size: 12px;
   text-transform: uppercase;
+  color: #EAEBF1;
+  background: rgba(39, 56, 209, 0.2);
+  transition: all 0.2s ease;
+}
+.default-btn:hover {
+  background: #2738D1;
 }
 
 .file-msg {
@@ -446,7 +570,7 @@ main .input .next {
 
 /*
 -=-=-=-=-=-=-=-=-=-=-
-        OUTPUT
+    OUTPUT
 -=-=-=-=-=-=-=-=-=-=-
 */
 #box-output .box-content #output-box {
@@ -480,7 +604,7 @@ main .input .next {
 
 /*
 -=-=-=-=-=-=-=-=-=-=-
-        CODE
+    CODE
 -=-=-=-=-=-=-=-=-=-=-
 */
 #box-code .box-content .code-container {
@@ -558,7 +682,7 @@ main .input .next {
 
 /*   
 -=-=-=-=-=-=-=-=-=-=-
-        PREVIEW
+    PREVIEW
 -=-=-=-=-=-=-=-=-=-=-
 */
 #box-preview .box-content {

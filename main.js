@@ -1,5 +1,6 @@
 // Import the app and BrowserWindow modules
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
+const storage = require('electron-json-storage');
 
 // Create a function to create the browser window
 const createWindow = () => {
@@ -8,7 +9,8 @@ const createWindow = () => {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true,
-        }
+        },
+        icon: 'public/logo.ico',
     })
 
     win.loadFile('index.html')
@@ -32,4 +34,22 @@ ipcMain.handle('showSaveDialog', async(event, options) => {
 // Handle the showOpenDialog request from the renderer process
 ipcMain.handle('showOpenDialog', async(event, options) => {
     return await dialog.showOpenDialog(options);
+});
+
+storage.setDataPath(app.getPath('userData'));
+
+function setSaves(save) {
+    return storage.set('saves', save);
+}
+
+function getSaves() {
+    return storage.getSync('saves') || [];
+}
+
+ipcMain.handle('setSaves', (event, save) => {
+    return setSaves(save)
+});
+
+ipcMain.handle('getSaves', (event) => {
+    return getSaves()
 });

@@ -1,5 +1,5 @@
 {
-    "name": "picscalez",
+    "name": "pixcalez",
     "version": "1.0.0",
     "main": "main.js",
     "scripts": {
@@ -14,14 +14,19 @@
         "appId": "picscalez",
         "mac": {
             "category": "public.app-category.graphics-design"
+        },
+        "win": {
+            "target": "portable",
+            "icon": "public/logo.svg"
         }
     },
     "dependencies": {
         "archiver": "^6.0.1",
+        "electron-json-storage": "^4.6.0",
         "sharp": "^0.32.6"
     },
     "devDependencies": {
         "electron": "26.2.2",
-        "electron-builder": "^24.6.4"
+        "electron-builder": "^24.9.0"
     }
 }

@@ -130,7 +130,7 @@ async function handleImageCombinations(rawData, filename, combinations) {
     let rtn = [];
     handler.log(`Starting to process image "${filename}" into ${combinations.length} combinations.`)
     for (const combination of combinations) {
-        rtn.push(await makeImage(rawData, filename, combination["scale"], combination["compress"], combination["export"]));
+        rtn.push(await makeImage(rawData, filename, combination.scale, combination.compress, combination.export));
         handler.addProgressAction(1);
     }
     return rtn;

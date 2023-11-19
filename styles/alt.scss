@@ -43,7 +43,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 1vw 8vw;
+    padding: 2vw 8vw 0vw 8vw;
     position: relative;
     z-index: 1;
     color: $light;
@@ -63,6 +63,126 @@ header {
         height: 1em;
         margin-right: 20px;
         z-index: 3;
+    }
+    .saves {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        .saveopt {
+            padding: 0 4px;
+            cursor: pointer;
+            &.active {
+                z-index: 101;
+            }
+        }
+        .savemodal {
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .8);
+            color: #fff;
+            display: none;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            &.active {
+                display: flex;
+            }
+            .modalbox {
+                background: $dark;
+                padding: 1.5vw 2vw;
+                .modaltitle {
+                    font-size: 2em;
+                    margin: 0;
+                    padding: 0;
+                }
+                .modalcontent {
+                    padding: 1vw 0;
+                    .modalinput {
+                        width: 100%;
+                        background: transparent;
+                        color: $light;
+                        font-family: 'PT', sans-serif;
+                        border: none;
+                        border-bottom: 2px solid $primary;
+                        resize: none;
+                        margin: 0;
+                        font-size: 1.5em;
+                    }
+                    .modalbutton {
+                        margin: 1vw 0 0;
+                    }
+                }
+            }
+            .templateinput {
+                max-height: 50vh;
+                overflow-y: auto;
+                .template {
+                    .templatelabel {
+                        margin: 4px 0;
+                        min-width: 25vw;
+                        border: 2.5px solid $darker;
+                        border-style: double;
+                        transition: all ease .2s;
+                        border-radius: 10px;
+                        background: $gray;
+                        padding: 4px 12px;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        justify-content: space-between;
+                        align-items: center;
+                        cursor: pointer;
+                        .templatevalues {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            width: 100%;
+                            .templatename {
+                                margin: 0;
+                            }
+                            .templatedate {
+                                padding: 0 16px;
+                            }
+                        }
+                        .templateremove {
+                            cursor: pointer;
+                            background: $red;
+                            color: $light;
+                            border-radius: 5px;
+                            border: 3px solid $red;
+                            transition: all 0.15s ease-in-out;
+                            transform-origin: top right;
+                            font-weight: bold;
+                            padding: 0 4px;
+                            width: min-content;
+                            svg {
+                                transition: all 0.15s ease-in-out;
+                                path {
+                                    fill: $light;
+                                }
+                            }
+                            &:hover {
+                                border: 3px solid $red;
+                                background: $dark;
+                                color: $red;
+                            }
+                        }
+                    }
+                    input[type="radio"] {
+                        display: none;
+                        &:checked+label {
+                            border: 2.5px solid $secondary !important;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -177,7 +297,6 @@ FILES
             border-top: 4px solid $secondary;
             border-left: 4px solid $secondary;
             cursor: pointer;
-            z-index: 50;
             margin: 0 1rem;
             &.disabled {
                 opacity: 0.5;
@@ -377,13 +496,19 @@ FILES
 .default-btn {
     cursor: pointer;
     flex-shrink: 0;
-    background-color: $secondary;
-    border: 1px solid $primary;
+    background-color: transparent;
+    border: 2px solid $primary;
     border-radius: 3px;
     padding: 8px 15px;
     margin-right: 10px;
     font-size: 12px;
     text-transform: uppercase;
+    color: $light;
+    background: rgba($color: $primary, $alpha: 0.2);
+    transition: all .2s ease;
+    &:hover {
+        background: $primary;
+    }
 }
 
 .file-msg {
@@ -462,7 +587,7 @@ font-size: 18px;
 
 /*
 -=-=-=-=-=-=-=-=-=-=-
-        OUTPUT
+    OUTPUT
 -=-=-=-=-=-=-=-=-=-=-
 */
 
@@ -500,7 +625,7 @@ font-size: 18px;
 
 /*
 -=-=-=-=-=-=-=-=-=-=-
-        CODE
+    CODE
 -=-=-=-=-=-=-=-=-=-=-
 */
 
@@ -584,7 +709,7 @@ font-size: 18px;
 
 /*   
 -=-=-=-=-=-=-=-=-=-=-
-        PREVIEW
+    PREVIEW
 -=-=-=-=-=-=-=-=-=-=-
 */
 

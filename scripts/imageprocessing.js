@@ -59,15 +59,15 @@ async function makeImage(rawData, filename, scale, compress, exprt) {
         let metadata = getMetadata(image);
         console.log(metadata);
         let targetHeight;
-        if (scale["scale"].includes("%")) {
-            targetHeight = metadata.height * parseFloat(filterFloat(scale["scale"])) / 100;
+        if (scale.value.includes("%")) {
+            targetHeight = metadata.height * parseFloat(filterFloat(scale.value)) / 100;
         } else {
-            targetHeight = parseFloat(filterFloat(scale["scale"]));
+            targetHeight = parseFloat(filterFloat(scale.value));
         }
         console.log(targetHeight);
         let scaledImage = await scaleImage(image, targetHeight);
-        let processedImage = await processImage(scaledImage, exprt, parseInt(compress))
-        let exportName = filename + "-" + scale["name"] + "-" + compress + "%." + exprt;
+        let processedImage = await processImage(scaledImage, exprt.value, parseInt(compress.value))
+        let exportName = filename + "-" + scale.name + "-" + compress + "%." + exprt;
         resolve({ "data": (await (processedImage).toBuffer()), "name": exportName });
     })
 }

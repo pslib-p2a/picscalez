@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pic Scalez</title>
+    <title>Pixcalez</title>
     <link rel="stylesheet" href="./styles/alt.css">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
@@ -41,7 +41,62 @@
     <div id="progressbar">
     </div>
     <header>
-        <div class=""></div>
+        <div class="saves">
+            <div class="saveopt" id="saveBtn">
+                <svg width="28" height="28" viewBox="0 0 68 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V90L34 68.4506L68 90V0H0Z" fill="#EAEBF1"/>
+                </svg>
+
+            </div>
+            <div class="saveopt" id="loadBtn">
+                <svg width="28" height="28" viewBox="0 0 73 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M41.5 42.5V6.5H68V57H17V19.5" stroke="#EAEBF1" stroke-width="10"/>
+                    <path d="M0 20H16.7302H34L16.7302 0L0 20Z" fill="#EAEBF1"/>
+                </svg>
+            </div>
+            <div class="savemodal" id="saveTemplate">
+                <div class="modalbox">
+                    <div class="modaltitle">Save template</div>
+                    <div class="modalcontent">
+                        <div class="templatevalue"></div>
+                        <div class="templateinput">
+                            <input type="text" class="modalinput" id="templateName" placeholder="Template name">
+                        </div>
+                        <button class="modalbutton default-btn" id="templatesave">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="savemodal" id="loadTemplate">
+                <div class="modalbox">
+                    <div class="modaltitle">Load template</div>
+                    <div class="modalcontent">
+                        <div class="templateinput" id="templateview">
+                            <div class="template">
+                                <input type="radio" value="123456" id="123456" name="loadtemplate" />
+                                <label for="123456" class="templatelabel">
+                                    <div class="templatevalues">
+                                        <h3 class="templatename">Ahojdaaaaaaaaaaaaaa1</h3>
+                                        <span class="templatedate">12.12.2020</span>
+                                    </div>
+                                    <button class="templateremove" onclick="removeTemplate(event)" id="1123456"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 100 80" x="0px" y="0px" width="24" height="24"><path data-name="Path" d="M39.1,10.8a4,4,0,0,0,0,8H60.9a4,4,0,1,0,0-8Z"></path><path data-name="Compound Path" d="M83.4,22.4H16.6a4,4,0,0,0,0,8h4l4.3,47.8a12,12,0,0,0,12,11H63.1a12,12,0,0,0,12-11l4.3-47.8h4a4,4,0,0,0,0-8ZM67.1,77.5a4,4,0,0,1-4,3.7H36.9a4,4,0,0,1-4-3.7L28.7,30.4H71.3Z"></path></svg></button>
+                                </label>
+                            </div>
+                            <div class="template">
+                                <input type="radio" value="1234567" id="1234567" name="loadtemplate" />
+                                <label for="1234567" class="templatelabel">
+                                    <div class="templatevalues">
+                                        <h3 class="templatename">Ahoj1</h3>
+                                        <span class="templatedate">12.12.2020</span>
+                                    </div>
+                                    <button class="templateremove" onclick="removeTemplate(event)" id="1123456"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 100 80" x="0px" y="0px" width="24" height="24"><path data-name="Path" d="M39.1,10.8a4,4,0,0,0,0,8H60.9a4,4,0,1,0,0-8Z"></path><path data-name="Compound Path" d="M83.4,22.4H16.6a4,4,0,0,0,0,8h4l4.3,47.8a12,12,0,0,0,12,11H63.1a12,12,0,0,0,12-11l4.3-47.8h4a4,4,0,0,0,0-8ZM67.1,77.5a4,4,0,0,1-4,3.7H36.9a4,4,0,0,1-4-3.7L28.7,30.4H71.3Z"></path></svg></button>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="modalbutton default-btn" id="templateload">Load</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <h1 class="logo"><img src="./public/logo.svg">Pixcalez</h1>
         <div id="progress">Waiting...</div>
     </header>
@@ -104,7 +159,7 @@
                         <div id="output-box">
                             <div id="output-copy">
                                 <svg width="20" height="20" viewBox="0 0 62 61" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0H62V50H55V6H12V0ZM50 11H0V61H50V11Z" fill="white"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0H62V50H55V6H12V0ZM50 11H0V61H50V11Z" fill="#EAEBF1"/>
                                 </svg>
                             </div>
                             <div id="output-content" contenteditable></div>
@@ -206,14 +261,14 @@
                             <div class="export-option" id="export-type">
                                 <h3>Typ exportu</h3>
                                 <div class="export-choices">
-                                    <input type="radio" value="raw" id="raw" name="type" checked />
+                                    <input type="radio" value="export-folder" id="raw" name="type" checked />
                                     <label class="export-choice" for="raw">
                                         <div class="export-info">
                                             <div class="export-icon">
         
                                                 <svg width="458" height="394" viewBox="0 0 458 394" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M343 26.5H144C143.448 26.5 143 26.9477 143 27.5V69.7474C143 70.2997 143.448 70.7474 144 70.7474H359C359.552 70.7474 360 70.2997 360 69.7474V43.5C360 34.1112 352.389 26.5 343 26.5Z" fill="#27D138" stroke="black" stroke-width="12"/>
-                                                    <path d="M201 11.4494C201 5.67836 205.688 1 211.472 1H309.206C314.99 1 319.678 5.67836 319.678 11.4494V85.4661C319.678 91.2372 314.99 95.9155 309.206 95.9155H211.472C205.688 95.9155 201 91.2372 201 85.4661V11.4494Z" fill="white"/>
+                                                    <path d="M201 11.4494C201 5.67836 205.688 1 211.472 1H309.206C314.99 1 319.678 5.67836 319.678 11.4494V85.4661C319.678 91.2372 314.99 95.9155 309.206 95.9155H211.472C205.688 95.9155 201 91.2372 201 85.4661V11.4494Z" fill="#EAEBF1"/>
                                                     <path d="M320 86.1044C320 91.5468 315.538 96 310.084 96H210.916C205.462 96 201 91.5477 201 86.1044V10.8947C201 5.45232 205.462 1 210.916 1H310.084C315.538 1 320 5.45232 320 10.8947V86.1044ZM210.916 8.9163C209.862 8.9163 208.934 9.8463 208.934 10.8939V86.1035C208.934 87.1546 209.863 88.0811 210.916 88.0811H310.084C311.134 88.0811 312.069 87.1546 312.069 86.1035V10.8939C312.069 9.8463 311.134 8.9163 310.084 8.9163H210.916ZM228.768 40.5824C222.198 40.5824 216.864 35.2636 216.864 28.7092C216.864 22.1548 222.198 16.8335 228.768 16.8335C235.335 16.8335 240.664 22.1548 240.664 28.7092C240.664 35.2636 235.336 40.5824 228.768 40.5824ZM304.132 80.1674H216.864V68.2899L236.699 48.5022L246.615 58.3943L278.348 26.7317L304.132 52.4608V80.1674Z" fill="black"/>
                                                     <path d="M6 300.5V23C6 13.6112 13.6112 6 23 6H126C135.389 6 143 13.6112 143 23V69.5C143 70.0523 143.448 70.5 144 70.5H379.5C388.889 70.5 396.5 78.1112 396.5 87.5V247V300.5C396.5 309.889 388.889 317.5 379.5 317.5H201.5H23C13.6112 317.5 6 309.889 6 300.5Z" fill="#8AF294" stroke="black" stroke-width="12"/>
                                                     <path d="M202 263V318.5V371C202 380.389 209.611 388 219 388H434.5C443.889 388 451.5 380.389 451.5 371V263C451.5 253.611 443.889 246 434.5 246H219C209.611 246 202 253.611 202 263Z" fill="#D9D9D9" stroke="black" stroke-width="12" stroke-linecap="round"/>
@@ -232,7 +287,7 @@
                                             <button class="default-btn export-btn" id="export-folder">Open</button>
                                         </div>
                                     </label>
-                                    <input type="radio" value="zip" id="zip" name="type" />
+                                    <input type="radio" value="export-zip" id="zip" name="type" />
                                     <label for="zip" class="export-choice">
                                         <div class="export-info">
                                             <div class="export-icon">
@@ -332,6 +387,7 @@
     <script defer src="./scripts/parser.js"></script>
     <script defer src="./scripts/upload.js"></script>
     <script defer src="./scripts/settinginterface.js"></script>
+    <script defer src="./scripts/saves.js"></script>
 </body>
 
 </html>

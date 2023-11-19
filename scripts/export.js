@@ -5,14 +5,22 @@ const fs = require("node:fs")
 const outputSelect = document.querySelector("#output-image-select")
 
 let exportOptions = {
-    path: "", // Path to export
-    option: "" // Export option (zip or folder)
+    zippath: "", // Path to ZIP file
+    folderpath: "", // Path to folder
+    option: "export-folder" // Export option (zip or folder)
 }
+
+document.querySelectorAll('input[name="type"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        exportOptions.option = radio.value
+        console.log(exportOptions);
+    })
+})
 
 async function zipimages(filelist, exportOptions) {
     handler.setProgressAction(0, filelist.length * filelist[0].length);
     if (exportOptions.option == "export-zip") {
-        const output = fs.createWriteStream(exportOptions.path);
+        const output = fs.createWriteStream(exportOptions.zippath);
 
         handler.log(`Generating ZIP file...`)
 
@@ -47,12 +55,12 @@ async function zipimages(filelist, exportOptions) {
             handler.addProgressGeneral(1);
         })
 
-        handler.log(`Exporting ${filelist.length} images with ${filelist[0].length} variations to ${exportOptions.path}...`)
+        handler.log(`Exporting ${filelist.length} images with ${filelist[0].length} variations to ${exportOptions.zippath}...`)
     } else if (exportOptions.option == "export-folder") {
         handler.log(`Writing to folder...`)
         for (const files of filelist) {
             for (const file of files) {
-                fs.writeFile(exportOptions.path + "/" + file.name, file.data, (err) => {
+                fs.writeFile(exportOptions.folderpath + "/" + file.name, file.data, (err) => {
                     if (err) {
                         handler.error(err);
                     }
@@ -61,6 +69,7 @@ async function zipimages(filelist, exportOptions) {
             }
         }
         handler.addProgressGeneral(1);
+        handler.log(`Exporting ${filelist.length} images with ${filelist[0].length} variations to ${exportOptions.folderpath}...`)
     }
 }
 
@@ -103,7 +112,11 @@ async function getSavePath(e) {
     if (res.canceled) return false;
     const path = res.filePath ? res.filePath : res.filePaths[0]
     e.target.parentElement.parentElement.querySelector("span").innerText = path
-    exportOptions = { path, option };
+    if (option == "export-zip") {
+        exportOptions.zippath = path
+    } else if (option == "export-folder") {
+        exportOptions.folderpath = path
+    }
     handler.success(`Successfully set export path to "${path}" with option "${option}"`)
     return true;
 }

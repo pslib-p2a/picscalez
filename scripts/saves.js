@@ -3,7 +3,13 @@ save
 {"id", "name", "value": {"commands": {"gui":[{"command": "resize", "value": "100x100"}, {"command": "format", "value": "png"}], "cli":"", "guiactive":true}, "export": {"option": "export-zip", "value": "test.zip"}}}
 */
 (async() => {
-    let saves = JSON.parse(await getSaves());
+    let saves = await getSaves();
+    if (!saves || saves == '[]' || saves == '{}') {
+        saves = [];
+        setSaves(saves)
+    } else {
+        saves = JSON.parse(saves);
+    }
     console.log(saves);
 
     function addSave(save) {

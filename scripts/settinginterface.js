@@ -108,8 +108,8 @@ function showResultCount(code) {
 
 asignInputChange()
 
-setTimeout(async() => {
-    document.querySelector("#export").onclick = async() => {
+//setTimeout(async() => {
+document.querySelector("#export").onclick = async() => {
         handler.log("Starting export")
         handler.setProgressGeneral(0, 2)
         handler.setProgressAction(0, imageData.length * combinations.length)
@@ -122,7 +122,7 @@ setTimeout(async() => {
         let zip = zipimages(rtn, exportOptions)
         console.log(zip);
     }
-}, 1000)
+    //}, 1000)
 
 
 

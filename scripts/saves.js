@@ -1,3 +1,4 @@
+//import ipcRenderer from 'electron';
 /*
 save 
 {"id", "name", "value": {"commands": {"gui":[{"command": "resize", "value": "100x100"}, {"command": "format", "value": "png"}], "cli":"", "guiactive":true}, "export": {"option": "export-zip", "value": "test.zip"}}}

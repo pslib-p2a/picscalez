@@ -137,8 +137,12 @@ async function handleImageCombinations(rawData, filename, combinations) {
 }
 
 handler.on('progress', (progress) => {
-    let progressPercent = Math.min((progress.general.current / progress.general.total + progress.action.current / progress.action.total / progress.general.total) * 100, 100)
-    progressBar.style.width = progressPercent + "%"
+    let progressPc
+    if (progress.general.current == 0) progressPc = progress.action.current / progress.action.total * 0.8
+    else if (progress.general.current == 1) progressPc = 0.8 + 0.2 * (progress.action.current / progress.action.total)
+    else progressPc = 1
+    let progressPercent = Math.min(progressPc * 100, 100)
+    progressBar.style.width = progressPercent + 1 + "%"
     progressText.innerHTML = Math.round(progressPercent) + "%"
 
     if (progressPercent == 100) {

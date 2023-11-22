@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pixcalez</title>
     <link rel="stylesheet" href="./styles/alt.css">
+    <link rel="stylesheet" href="./styles/atomtheme.css">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
 </head>
@@ -70,28 +71,7 @@
                 <div class="modalbox">
                     <div class="modaltitle">Load template</div>
                     <div class="modalcontent">
-                        <div class="templateinput" id="templateview">
-                            <div class="template">
-                                <input type="radio" value="123456" id="123456" name="loadtemplate" />
-                                <label for="123456" class="templatelabel">
-                                    <div class="templatevalues">
-                                        <h3 class="templatename">Ahojdaaaaaaaaaaaaaa1</h3>
-                                        <span class="templatedate">12.12.2020</span>
-                                    </div>
-                                    <button class="templateremove" onclick="removeTemplate(event)" id="1123456"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 100 80" x="0px" y="0px" width="24" height="24"><path data-name="Path" d="M39.1,10.8a4,4,0,0,0,0,8H60.9a4,4,0,1,0,0-8Z"></path><path data-name="Compound Path" d="M83.4,22.4H16.6a4,4,0,0,0,0,8h4l4.3,47.8a12,12,0,0,0,12,11H63.1a12,12,0,0,0,12-11l4.3-47.8h4a4,4,0,0,0,0-8ZM67.1,77.5a4,4,0,0,1-4,3.7H36.9a4,4,0,0,1-4-3.7L28.7,30.4H71.3Z"></path></svg></button>
-                                </label>
-                            </div>
-                            <div class="template">
-                                <input type="radio" value="1234567" id="1234567" name="loadtemplate" />
-                                <label for="1234567" class="templatelabel">
-                                    <div class="templatevalues">
-                                        <h3 class="templatename">Ahoj1</h3>
-                                        <span class="templatedate">12.12.2020</span>
-                                    </div>
-                                    <button class="templateremove" onclick="removeTemplate(event)" id="1123456"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 100 80" x="0px" y="0px" width="24" height="24"><path data-name="Path" d="M39.1,10.8a4,4,0,0,0,0,8H60.9a4,4,0,1,0,0-8Z"></path><path data-name="Compound Path" d="M83.4,22.4H16.6a4,4,0,0,0,0,8h4l4.3,47.8a12,12,0,0,0,12,11H63.1a12,12,0,0,0,12-11l4.3-47.8h4a4,4,0,0,0,0-8ZM67.1,77.5a4,4,0,0,1-4,3.7H36.9a4,4,0,0,1-4-3.7L28.7,30.4H71.3Z"></path></svg></button>
-                                </label>
-                            </div>
-                        </div>
+                        <div class="templateinput" id="templateview"></div>
                         <button class="modalbutton default-btn" id="templateload">Load</button>
                     </div>
                 </div>
@@ -162,7 +142,7 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0H62V50H55V6H12V0ZM50 11H0V61H50V11Z" fill="#EAEBF1"/>
                                 </svg>
                             </div>
-                            <div id="output-content" contenteditable></div>
+                            <div id="output-content"></div>
                         </div>
                     </div>
                 </div>

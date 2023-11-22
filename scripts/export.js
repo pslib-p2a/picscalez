@@ -2,6 +2,10 @@ const archiver = require('archiver')
 const { ipcRenderer } = require("electron")
 const fs = require("node:fs")
 
+const hljs = require('highlight.js/lib/core');
+const xml = require('highlight.js/lib/languages/xml');
+hljs.registerLanguage('xml', xml);
+
 const outputSelect = document.querySelector("#output-image-select")
 
 let exportOptions = {
@@ -88,20 +92,17 @@ async function getSavePath(e) {
     let res
     if (option == "export-zip") {
         options = {
-            title: 'Vyberte místo uložení pro výsledný ZIP archiv',
-            buttonLabel: 'Exportovat zde',
+            title: 'Select a ZIP file to export to',
+            buttonLabel: 'Export here',
             filters: [
-                { name: 'ZIP Archiv', extensions: ['zip'] }
+                { name: 'ZIP/TAR Archive', extensions: ['zip', 'tar', 'tar.gz'] }
             ]
         };
         res = await ipcRenderer.invoke('showSaveDialog', options);
     } else if (option == "export-folder") {
         options = {
-            title: 'Vyberte složku pro výstup',
-            buttonLabel: 'Exportovat sem',
-            filters: [
-                { name: 'Složka', extensions: ['zip'] }
-            ],
+            title: 'Select a folder to export to',
+            buttonLabel: 'Export here',
             properties: [
                 "openDirectory"
             ]
@@ -132,8 +133,23 @@ const data = [{ "name": "img-small.avif", "format": "avif", "size": "480w" }, { 
 
 let HTMLOutput = document.querySelector("#output-content")
 
+let outputCopy = document.querySelector("#output-copy")
+outputCopy.onclick = () => {
+    navigator.clipboard.writeText(imageHTML).then(() => {
+        handler.success("Copied output to clipboard")
+    })
+}
+
 outputSelect.onchange = updateOutputHTML
 
+function escapeHtml(text) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
 function updateOutputHTML() {
     uploadedImages.forEach(image => {
@@ -149,7 +165,7 @@ function updateOutputHTML() {
                     size = parseFloat(filterFloat(com.scale.value));
                 }
 
-                let [namesString, suffix] = image.name.split(".");
+                let namesString = image.name.split(".")[0];
                 Object.keys(com).forEach(command => {
                     if (com[command].name) {
                         namesString += "_" + command.charAt(0) + com[command].name;
@@ -161,7 +177,10 @@ function updateOutputHTML() {
             })
             console.log(data);
             imageHTML = makeHTML(data)
-            HTMLOutput.innerText = imageHTML
+            let highlightedCode = hljs.highlight(
+                imageHTML, { language: 'xml' }
+            ).value
+            HTMLOutput.innerHTML = highlightedCode
         }
     })
 
